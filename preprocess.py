@@ -36,7 +36,7 @@ class MovieLens1M(DatasetLoader):
 
 class Retail(DatasetLoader):
     def __init__(self, data_dir):
-        self.fpath = os.path.join(data_dir, 'view.csv')
+        self.fpath = os.path.join(data_dir, 'event.csv')
 
     def load(self):
         # Load data
