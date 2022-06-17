@@ -34,6 +34,20 @@ class MovieLens1M(DatasetLoader):
         # df = df[df['rate'] >= 3]
         return df
 
+class Retail(DatasetLoader):
+    def __init__(self, data_dir):
+        self.fpath = os.path.join(data_dir, 'view.csv')
+
+    def load(self):
+        # Load data
+        df = pd.read_csv(self.fpath,
+                         sep='::',
+                         engine='python',
+                         names=['time', 'user', 'rate', 'item', 'transaction'])
+        # TODO: Remove negative rating?
+        # df = df[df['rate'] >= 3]
+        return df
+
 
 class MovieLens20M(DatasetLoader):
     def __init__(self, data_dir):
@@ -171,6 +185,8 @@ def main(args):
         df = MovieLens20M(args.data_dir).load()
     elif args.dataset == 'amazon-beauty':
         df = AmazonBeauty(args.data_dir).load()
+    elif args.dataset == 'retail':
+        df = Retail(args.data_dir).load()
     else:
         raise NotImplementedError
     df, user_mapping = convert_unique_idx(df, 'user')
@@ -203,7 +219,7 @@ if __name__ == '__main__':
     # Parse argument
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset',
-                        choices=['ml-1m', 'ml-20m', 'amazon-beauty', 'gowalla'])
+                        choices=['ml-1m', 'ml-20m', 'retail', 'amazon-beauty', 'gowalla'])
     parser.add_argument('--data_dir',
                         type=str,
                         default=os.path.join('data', 'ml-1m'),
