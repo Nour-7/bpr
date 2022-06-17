@@ -43,7 +43,7 @@ class Retail(DatasetLoader):
         df = pd.read_csv(self.fpath,
                          sep='::',
                          engine='python',
-                         names=['time', 'user', 'rate', 'item', 'transaction'])
+                         names=['time', 'user', 'rate', 'item'])
         # TODO: Remove negative rating?
         # df = df[df['rate'] >= 3]
         return df
