@@ -41,7 +41,7 @@ class Retail(DatasetLoader):
     def load(self):
         # Load data
         df = pd.read_csv(self.fpath,
-                         sep='::',
+                         sep=',',
                          engine='python',
                          names=['time', 'user', 'rate', 'item'])
         # TODO: Remove negative rating?
